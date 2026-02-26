@@ -8,123 +8,116 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --uni-blue: #1e3a8a;
+            --uni-blue: #1e40af;
             --uni-blue-light: #3b82f6;
-            --ramadan-green: #064e3b;
+            --ramadan-green: #065f46;
             --ramadan-light: #10b981;
             --online-amber: #d97706;
         }
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: #f1f5f9;
+            background-color: #f8fafc;
             transition: all 0.5s ease;
         }
-        .ramadan-mode body {
-            background-color: #f0fdf4;
-        }
-        /* Tab Styling */
+        .ramadan-mode body { background-color: #f0fdf4; }
+
+        /* Modern Tab Styling */
         .day-tab {
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            background: white;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
             color: #64748b;
-            border: 1px solid #e2e8f0;
+            border: 1px solid rgba(226, 232, 240, 0.8);
         }
         .tab-active {
             background-color: var(--uni-blue);
             color: #ffffff !important;
-            transform: translateY(-5px);
-            box-shadow: 0 12px 20px -5px rgba(30, 58, 138, 0.4);
-            border: transparent;
+            transform: scale(1.05);
+            box-shadow: 0 15px 25px -5px rgba(30, 64, 175, 0.4);
+            border-color: transparent;
         }
         .ramadan-mode .tab-active {
             background-color: var(--ramadan-green);
-            box-shadow: 0 12px 20px -5px rgba(6, 78, 59, 0.4);
+            box-shadow: 0 15px 25px -5px rgba(6, 95, 70, 0.4);
         }
-        /* Today Indicator */
+
         .is-today::after {
             content: 'اليوم';
             position: absolute;
-            top: -12px;
+            top: -10px;
             left: 50%;
             transform: translateX(-50%);
             background: #ef4444;
             color: white;
-            font-size: 8px;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: 900;
+            font-size: 9px;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-weight: 800;
+            box-shadow: 0 4px 6px rgba(239, 68, 68, 0.3);
         }
 
-        @keyframes cardFade {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); filter: blur(10px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
         }
-        .animate-card { animation: cardFade 0.5s ease-out forwards; opacity: 0; }
+        .animate-card { animation: slideIn 0.6s ease-out forwards; opacity: 0; }
         
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
         .online-card {
-            border-right: 8px solid var(--online-amber) !important;
-            background: linear-gradient(to left, #fffbeb, #ffffff);
+            border-right: 10px solid var(--online-amber) !important;
+            background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%);
         }
     </style>
 </head>
-<body class="min-h-screen pb-24">
+<body class="min-h-screen pb-12">
 
-    <!-- Header -->
-    <header id="header" class="bg-blue-900 text-white pt-12 pb-32 px-6 rounded-b-[4.5rem] shadow-2xl transition-all duration-700 relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-20 -mt-20 blur-3xl"></div>
-        <div class="absolute bottom-0 left-0 w-48 h-48 bg-blue-400/10 rounded-full -ml-10 -mb-10 blur-2xl"></div>
+    <header id="header" class="bg-blue-800 text-white pt-16 pb-36 px-8 rounded-b-[5rem] shadow-2xl transition-all duration-700 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full -mr-32 -mt-32 blur-3xl"></div>
+        <div class="absolute -bottom-10 -left-10 w-48 h-48 bg-blue-400/20 rounded-full blur-2xl"></div>
         
         <div class="max-w-xl mx-auto text-center relative z-10">
             <div class="flex justify-center mb-6">
-                <span class="bg-white/10 backdrop-blur-xl px-5 py-2 rounded-full text-[10px] font-black tracking-widest border border-white/20 uppercase">
-                   🏛️ Irbid National University
+                <span class="bg-black/20 backdrop-blur-md px-6 py-2 rounded-full text-[11px] font-bold tracking-widest border border-white/20 uppercase">
+                    🎓 Irbid National University
                 </span>
             </div>
-            <h1 class="text-5xl font-black mb-3 tracking-tighter">جدول محمد</h1>
-            <p class="text-blue-100 opacity-80 text-sm mb-12 font-medium">خطط ليومك، حقق أهدافك 🚀</p>
+            <h1 class="text-6xl font-black mb-4 tracking-tight drop-shadow-lg">جدول محمد</h1>
+            <p class="text-blue-100 opacity-90 text-lg font-medium mb-10 italic">"تنظيم الوقت هو أول خطوة للنجاح" 🚀</p>
             
-            <!-- Mode Selector -->
-            <div class="inline-flex p-1.5 bg-black/30 backdrop-blur-2xl rounded-2xl border border-white/10 shadow-2xl">
-                <button onclick="setMode('normal')" id="btn-normal" class="px-8 py-3 rounded-xl font-bold transition-all bg-white text-blue-900 shadow-xl">
+            <div class="inline-flex p-1.5 bg-black/20 backdrop-blur-xl rounded-2xl border border-white/10 shadow-inner">
+                <button onclick="setMode('normal')" id="btn-normal" class="px-10 py-3 rounded-xl font-bold transition-all bg-white text-blue-900 shadow-xl">
                     📅 عادي
                 </button>
-                <button onclick="setMode('ramadan')" id="btn-ramadan" class="px-8 py-3 rounded-xl font-bold transition-all text-white hover:bg-white/10">
+                <button onclick="setMode('ramadan')" id="btn-ramadan" class="px-10 py-3 rounded-xl font-bold transition-all text-white hover:bg-white/5">
                     🌙 رمضان
                 </button>
             </div>
         </div>
     </header>
 
-    <main class="max-w-xl mx-auto px-5 -mt-16 relative z-20">
+    <main class="max-w-xl mx-auto px-6 -mt-20 relative z-20">
         
-        <!-- Days Navigation -->
-        <div class="flex gap-2.5 mb-10 overflow-x-auto no-scrollbar py-4 px-1">
-            <button onclick="setTab(0)" id="tab-0" class="day-tab flex-1 min-w-[75px] py-4 rounded-2xl font-black text-xs relative">الأحد</button>
-            <button onclick="setTab(1)" id="tab-1" class="day-tab flex-1 min-w-[75px] py-4 rounded-2xl font-black text-xs relative">الاثنين</button>
-            <button onclick="setTab(2)" id="tab-2" class="day-tab flex-1 min-w-[75px] py-4 rounded-2xl font-black text-xs relative">الثلاثاء</button>
-            <button onclick="setTab(3)" id="tab-3" class="day-tab flex-1 min-w-[75px] py-4 rounded-2xl font-black text-xs relative">الأربعاء</button>
-            <button onclick="setTab(4)" id="tab-4" class="day-tab flex-1 min-w-[75px] py-4 rounded-2xl font-black text-xs relative">الخميس</button>
-            <button onclick="setTab(6)" id="tab-6" class="day-tab flex-1 min-w-[75px] py-4 rounded-2xl font-black text-xs relative">السبت</button>
+        <div class="flex gap-4 mb-12 overflow-x-auto no-scrollbar py-4 px-2">
+            <button onclick="setTab(0)" id="tab-0" class="day-tab flex-1 min-w-[85px] py-5 rounded-[2rem] font-black text-sm relative">الأحد</button>
+            <button onclick="setTab(1)" id="tab-1" class="day-tab flex-1 min-w-[85px] py-5 rounded-[2rem] font-black text-sm relative">الاثنين</button>
+            <button onclick="setTab(2)" id="tab-2" class="day-tab flex-1 min-w-[85px] py-5 rounded-[2rem] font-black text-sm relative">الثلاثاء</button>
+            <button onclick="setTab(6)" id="tab-6" class="day-tab flex-1 min-w-[85px] py-5 rounded-[2rem] font-black text-sm relative">السبت</button>
         </div>
 
-        <!-- Schedule Container -->
-        <div id="schedule-list" class="space-y-5">
-            <!-- Dynamic Content -->
-        </div>
+        <div id="schedule-list" class="space-y-6">
+            </div>
 
-        <!-- Professional Footer -->
-        <div class="mt-12 bg-white/60 backdrop-blur-lg p-1.5 rounded-[3rem] shadow-sm border border-white">
-            <div class="grid grid-cols-2 gap-1.5">
-                <div class="bg-white p-7 rounded-[2.8rem] text-center">
-                    <p class="text-[9px] text-gray-400 font-black uppercase tracking-[0.2em] mb-2">الساعات المسجلة</p>
-                    <p class="text-3xl font-black text-gray-800">18</p>
+        <div class="mt-16 bg-white/40 backdrop-blur-xl p-2 rounded-[3.5rem] shadow-xl border border-white/50">
+            <div class="grid grid-cols-2 gap-2">
+                <div class="bg-white p-8 rounded-[3.2rem] text-center shadow-sm">
+                    <p class="text-[10px] text-gray-400 font-black uppercase tracking-[0.2em] mb-2">الساعات المسجلة</p>
+                    <p class="text-4xl font-black text-gray-800">18</p>
                 </div>
-                <div class="bg-white p-7 rounded-[2.8rem] text-center">
-                    <p class="text-[9px] text-gray-400 font-black uppercase tracking-[0.2em] mb-2">حالة المحاضرات</p>
-                    <p id="status-tag" class="text-sm font-black text-blue-600">فعّال ومستمر</p>
+                <div class="bg-white p-8 rounded-[3.2rem] text-center shadow-sm">
+                    <p class="text-[10px] text-gray-400 font-black uppercase tracking-[0.2em] mb-2">حالة الفصل</p>
+                    <p id="status-tag" class="text-sm font-black text-blue-600">ممتاز • مستمر</p>
                 </div>
             </div>
         </div>
@@ -144,13 +137,12 @@
             skills: { name: 'المهارات الحياتية', teacher: 'م. سلسبيل الطريفي', room: 'أونلاين', n: '05:30 - 07:00 م', r: '03:30 - 04:30 م', icon: '🌱', isOnline: true }
         };
 
+        // تم حذف يوم الأربعاء (3) والخميس (4) نهائياً
         const scheduleData = {
             0: [subjects.calc, subjects.progN, subjects.arch, subjects.netN], // الأحد
             1: [subjects.progA, subjects.netA, subjects.english],             // الاثنين
             2: [subjects.calc, subjects.progN, subjects.arch],                // الثلاثاء
-            3: [subjects.progA, subjects.netA, subjects.english],             // الأربعاء
-            4: [subjects.calc, subjects.progN, subjects.arch, subjects.netN, subjects.skills], // الخميس
-            6: [subjects.skills] // السبت
+            6: [subjects.skills]                                              // السبت
         };
 
         function setMode(m) {
@@ -162,15 +154,15 @@
             
             if (m === 'ramadan') {
                 document.documentElement.classList.add('ramadan-mode');
-                header.classList.replace('bg-blue-900', 'bg-emerald-900');
-                btnR.className = "px-8 py-3 rounded-xl font-bold transition-all bg-white text-emerald-900 shadow-xl";
-                btnN.className = "px-8 py-3 rounded-xl font-bold transition-all text-white hover:bg-white/10";
+                header.classList.replace('bg-blue-800', 'bg-emerald-900');
+                btnR.className = "px-10 py-3 rounded-xl font-bold transition-all bg-white text-emerald-900 shadow-xl scale-105";
+                btnN.className = "px-10 py-3 rounded-xl font-bold transition-all text-white hover:bg-white/10";
                 statusTag.classList.replace('text-blue-600', 'text-emerald-600');
             } else {
                 document.documentElement.classList.remove('ramadan-mode');
-                header.classList.replace('bg-emerald-900', 'bg-blue-900');
-                btnN.className = "px-8 py-3 rounded-xl font-bold transition-all bg-white text-blue-900 shadow-xl";
-                btnR.className = "px-8 py-3 rounded-xl font-bold transition-all text-white hover:bg-white/10";
+                header.classList.replace('bg-emerald-900', 'bg-blue-800');
+                btnN.className = "px-10 py-3 rounded-xl font-bold transition-all bg-white text-blue-900 shadow-xl scale-105";
+                btnR.className = "px-10 py-3 rounded-xl font-bold transition-all text-white hover:bg-white/10";
                 statusTag.classList.replace('text-emerald-600', 'text-blue-600');
             }
             render();
@@ -192,7 +184,11 @@
             const data = scheduleData[state.currentDay] || [];
             
             if (data.length === 0) {
-                list.innerHTML = `<div class="text-center py-20 animate-card"><p class="text-gray-400 font-bold text-lg">لا محاضرات اليوم.. استمتع بوقتك! ☕</p></div>`;
+                list.innerHTML = `
+                <div class="text-center py-24 animate-card bg-white/50 rounded-[3rem] border-2 border-dashed border-gray-200">
+                    <span class="text-6xl block mb-4">☕</span>
+                    <p class="text-gray-400 font-bold text-xl">لا محاضرات اليوم.. استراحة محارب!</p>
+                </div>`;
                 return;
             }
 
@@ -200,34 +196,35 @@
                 const isOnline = item.isOnline;
                 const card = document.createElement('div');
                 
-                const cardBase = "p-6 rounded-[2.5rem] shadow-sm border border-gray-100 flex items-center gap-6 animate-card relative overflow-hidden";
+                const cardBase = "p-7 rounded-[3rem] shadow-sm border border-gray-100 flex items-center gap-7 animate-card relative overflow-hidden";
                 card.className = isOnline ? `${cardBase} online-card` : `bg-white ${cardBase}`;
-                card.style.animationDelay = `${i * 0.08}s`;
+                card.style.animationDelay = `${i * 0.1}s`;
                 
                 let iconBg, timeTag;
                 if (isOnline) {
-                    iconBg = "bg-amber-100 text-amber-700";
-                    timeTag = "bg-amber-600 text-white shadow-sm shadow-amber-200";
+                    iconBg = "bg-amber-100 text-amber-700 shadow-[inset_0_2px_10px_rgba(217,119,6,0.1)]";
+                    timeTag = "bg-amber-600 text-white shadow-lg shadow-amber-200";
                 } else {
                     iconBg = state.mode === 'ramadan' ? 'bg-emerald-50 text-emerald-800' : 'bg-blue-50 text-blue-900';
                     timeTag = state.mode === 'ramadan' ? 'bg-emerald-100 text-emerald-800' : 'bg-blue-100 text-blue-900';
+                    iconBg += " shadow-inner";
                 }
                 
                 card.innerHTML = `
-                    <div class="w-16 h-16 rounded-3xl flex items-center justify-center text-3xl shrink-0 ${iconBg} shadow-inner">
+                    <div class="w-20 h-20 rounded-[2rem] flex items-center justify-center text-4xl shrink-0 ${iconBg}">
                         ${item.icon}
                     </div>
                     <div class="flex-1 min-w-0">
-                        <div class="flex justify-between items-center mb-1">
-                            <h3 class="font-black text-gray-800 text-lg leading-tight truncate">${item.name}</h3>
-                            ${isOnline ? '<span class="text-[8px] bg-amber-100 text-amber-700 px-2 py-1 rounded font-black tracking-tighter uppercase">Online</span>' : ''}
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-black text-gray-800 text-xl leading-tight truncate">${item.name}</h3>
+                            ${isOnline ? '<span class="text-[9px] bg-amber-500 text-white px-3 py-1 rounded-full font-black uppercase">Online</span>' : ''}
                         </div>
-                        <p class="text-xs text-gray-400 font-bold mb-4 flex items-center gap-2">
+                        <p class="text-sm text-gray-400 font-bold mb-4 flex items-center gap-2">
                             <span>${item.teacher}</span>
-                            <span class="w-1 h-1 bg-gray-200 rounded-full"></span>
+                            <span class="w-1.5 h-1.5 bg-gray-200 rounded-full"></span>
                             <span class="${isOnline ? 'text-amber-600' : (state.mode === 'ramadan' ? 'text-emerald-600' : 'text-blue-600')} font-black">${item.room}</span>
                         </p>
-                        <div class="flex items-center py-2.5 px-5 rounded-2xl font-black text-xs w-fit ${timeTag} transition-all duration-300">
+                        <div class="flex items-center py-3 px-6 rounded-2xl font-black text-xs w-fit ${timeTag}">
                             <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             ${state.mode === 'normal' ? item.n : item.r}
                         </div>
@@ -239,11 +236,11 @@
 
         window.onload = () => {
             const today = new Date().getDay();
-            // Handle indicator
             const todayBtn = document.getElementById(`tab-${today}`);
             if (todayBtn) todayBtn.classList.add('is-today');
             
-            if (today === 5) setTab(0); // If Friday, show Sunday
+            // إذا كان اليوم عطلة أو الخميس/الأربعاء، اعرض الأحد تلقائياً
+            if ([3, 4, 5].includes(today)) setTab(0);
             else setTab(today);
             
             render();
